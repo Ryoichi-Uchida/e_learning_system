@@ -53,7 +53,7 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="" class="nav-link">DashBoard</a>
+                                <a href="" class="nav-link">d   ashBoard</a>
                             </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link">Lessons</a>
@@ -81,7 +81,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    @if (Auth::user()->is_admin == "1")
+                                    @if (Auth::user()->is_admin)
                                         <a class="dropdown-item" href="">
                                             Manage Lessons
                                         </a>
