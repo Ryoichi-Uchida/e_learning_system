@@ -53,13 +53,13 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="" class="nav-link">Dashboard</a>
+                                <a href="{{ route('home') }}" class="nav-link">Dashboard</a>
                             </li>
                             <li class="nav-item">
                                 <a href="" class="nav-link">Lessons</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">Others</a>
+                                <a href="{{ route('user.index') }}" class="nav-link">Others</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
