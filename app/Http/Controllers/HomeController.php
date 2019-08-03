@@ -25,4 +25,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show()
+    {
+        return view('home.show');
+    }
+
 }
