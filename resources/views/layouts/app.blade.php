@@ -82,7 +82,7 @@
                                         @csrf
                                     </form>
                                     @if (Auth::user()->is_admin)
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{ route('material.index') }}">
                                             Manage Lessons
                                         </a>
                                     @endif
