@@ -13,7 +13,6 @@
                     <img src="/images/{{ Auth::user()->avatar }}" alt="" class="mb-3 avatar">
                     <h2 class="mb-3">{{ Auth::user()->name }}</h2>
                     <h5 class="mb-3">{{ Auth::user()->email }}</h5>
-                    
                     <a href="{{ route('home.edit') }}" class="btn btn-success">Update Profile</a>
                 </div>
                 <div class="user-follow p-2 my-3">
