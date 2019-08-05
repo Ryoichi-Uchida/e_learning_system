@@ -81,11 +81,11 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    {{-- @if (Auth::user()->is_admin) --}}
+                                    @if (Auth::user()->is_admin)
                                         <a class="dropdown-item" href="{{ route('material.index') }}">
                                             Manage Lessons
                                         </a>
-                                    {{-- @endif --}}
+                                    @endif
                                 </div>
                             </li>
                         @endguest
