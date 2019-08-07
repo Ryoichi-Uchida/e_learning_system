@@ -27,7 +27,10 @@ Route::patch('/home/update_avatar', 'HomeController@update_avatar')->name('home.
 Route::patch('/home/update_password', 'HomeController@update_password')->name('home.update_password');
 
 // User
-Route::get('/users', 'UserController@index')->middleware('auth')->name('user.index');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/users', 'UserController@index')->name('user.index');
+    Route::get('/users/{user}', 'UserController@show')->name('user.show');  
+});
 
 // Material
 Route::get('/materials', 'MaterialController@index')->middleware('admin')->name('material.index');
