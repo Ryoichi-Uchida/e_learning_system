@@ -31,3 +31,6 @@ Route::get('/users', 'UserController@index')->middleware('auth')->name('user.ind
 
 // Material
 Route::get('/materials', 'MaterialController@index')->middleware('admin')->name('material.index');
+Route::get('/materials/create_category', 'MaterialController@create_category')->middleware('admin')->name('material.create_category');
+Route::get('/materials/create_question', 'MaterialController@create_question')->middleware('admin')->name('material.create_question');
+

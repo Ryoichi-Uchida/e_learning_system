@@ -49370,6 +49370,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/materials/createQuestion.scss":
+/*!******************************************************!*\
+  !*** ./resources/sass/materials/createQuestion.scss ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/users/index.scss":
 /*!*****************************************!*\
   !*** ./resources/sass/users/index.scss ***!
@@ -49393,9 +49404,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!********************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/home.scss ./resources/sass/users/index.scss ***!
-  \********************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/home.scss ./resources/sass/users/index.scss ./resources/sass/materials/createQuestion.scss ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49403,7 +49414,8 @@ __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/welcome.scss */"./resources/sass/welcome.scss");
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/home.scss */"./resources/sass/home.scss");
-module.exports = __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/users/index.scss */"./resources/sass/users/index.scss");
+__webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/users/index.scss */"./resources/sass/users/index.scss");
+module.exports = __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/materials/createQuestion.scss */"./resources/sass/materials/createQuestion.scss");
 
 
 /***/ })

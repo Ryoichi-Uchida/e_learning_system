@@ -21,9 +21,14 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_category()
     {
-        //
+        return view('materials.createCategory');
+    }
+
+    public function create_question()
+    {
+        return view('materials.createQuestion');
     }
 
     /**
