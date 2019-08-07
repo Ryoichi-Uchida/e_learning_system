@@ -28,6 +28,7 @@ Route::patch('/home/update_password', 'HomeController@update_password')->name('h
 
 // User
 Route::get('/users', 'UserController@index')->middleware('auth')->name('user.index');
+Route::get('/users/{user}', 'UserController@show')->middleware('auth')->name('user.show');
 
 // Material
 Route::get('/materials', 'MaterialController@index')->middleware('admin')->name('material.index');
