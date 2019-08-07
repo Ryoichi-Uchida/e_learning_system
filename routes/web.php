@@ -29,8 +29,18 @@ Route::patch('/home/update_password', 'HomeController@update_password')->name('h
 // User
 Route::get('/users', 'UserController@index')->middleware('auth')->name('user.index');
 
-// Material
-Route::get('/materials', 'MaterialController@index')->middleware('admin')->name('material.index');
-Route::get('/materials/create_category', 'MaterialController@create_category')->middleware('admin')->name('material.create_category');
-Route::get('/materials/create_question', 'MaterialController@create_question')->middleware('admin')->name('material.create_question');
+// Admin
+Route::group(['middleware' => ['auth', 'admin']], function () {
+
+    // Material
+    Route::get('/materials', 'MaterialController@index')->name('material.index');
+
+    // Category
+    Route::get('/categories/create', 'CategoryController@create')->name('category.create');
+
+    // Question
+    Route::get('/questions/create', 'QuestionController@create')->name('question.create');
+
+});
+
 
