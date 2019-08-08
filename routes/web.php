@@ -18,18 +18,20 @@ Route::get('/', function () {
 Auth::routes();
 
 // Home
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home/show', 'HomeController@show')->name('home.show');
-Route::get('/home/edit', 'HomeController@edit')->name('home.edit');
-Route::patch('/home/update_name', 'HomeController@update_name')->name('home.update_name');
-Route::patch('/home/update_email', 'HomeController@update_email')->name('home.update_email');
-Route::patch('/home/update_avatar', 'HomeController@update_avatar')->name('home.update_avatar');
-Route::patch('/home/update_password', 'HomeController@update_password')->name('home.update_password');
+Route::group(['prefix' => 'home', 'as' => 'home'], function () {
+    Route::get('', 'HomeController@index')->name('');
+    Route::get('show', 'HomeController@show')->name('.show');
+    Route::get('edit', 'HomeController@edit')->name('.edit');
+    Route::patch('update_name', 'HomeController@update_name')->name('.update_name');
+    Route::patch('update_email', 'HomeController@update_email')->name('.update_email');
+    Route::patch('update_avatar', 'HomeController@update_avatar')->name('.update_avatar');
+    Route::patch('update_password', 'HomeController@update_password')->name('.update_password');
+});
 
 // User
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/users', 'UserController@index')->name('user.index');
-    Route::get('/users/{user}', 'UserController@show')->name('user.show');  
+Route::group(['middleware' => 'auth', 'prefix' => 'users', 'as' => 'user'], function () {
+    Route::get('', 'UserController@index')->name('.index');
+    Route::get('{user}', 'UserController@show')->name('.show');  
 });
 
 // Material
