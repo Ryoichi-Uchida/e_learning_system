@@ -109,16 +109,14 @@ class UserController extends Controller
     public function following(User $user)
     {
         $users = $user->following()->paginate(10);
-        $one_user = $user;
 
-        return view('users.following', compact('users', 'one_user'));
+        return view('users.following', compact('users', 'user'));
     }
 
     public function followed(User $user)
     {
-        $users = $user->followed()->paginate(10);
-        $one_user = $user;
+        $users = $user->followed()->paginate(10);       
 
-        return view('users.followed', compact('users', 'one_user'));
+        return view('users.followed', compact('users', 'user'));
     }
 }
