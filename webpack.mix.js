@@ -21,6 +21,6 @@ mix.sass('resources/sass/home.scss','public/css');
 // User
 mix.sass('resources/sass/users/index.scss','public/css/users');
 
-// Material
-mix.sass('resources/sass/materials/createQuestion.scss','public/css/materials');
+// Admin
+mix.sass('resources/sass/admins/createQuestion.scss','public/css/admins');
 

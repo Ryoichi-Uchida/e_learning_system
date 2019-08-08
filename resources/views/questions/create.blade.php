@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/materials/createQuestion.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admins/createQuestion.css') }}">
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
         <div class="col-10 bg-white">
             <div class="my-4">
                 <div class="title">
-                    <a href="{{ route('material.index') }}" class="btn btn-secondary float-right mr-4">Back to Category</a>
+                    <a href="{{ route('category.create') }}" class="btn btn-secondary float-right mr-4">Back to Category</a>
                     <h1 class="p-2 mb-4 mx-4 border-bottom">Add New Question</h1>
                 </div>
                 <form action="" method="post">

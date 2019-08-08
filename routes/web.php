@@ -30,13 +30,13 @@ Route::patch('/home/update_password', 'HomeController@update_password')->name('h
 Route::get('/users', 'UserController@index')->middleware('auth')->name('user.index');
 
 // Admin
-Route::group(['middleware' => ['auth', 'admin']], function () {
-
-    // Material
-    Route::get('/materials', 'MaterialController@index')->name('material.index');
+Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], function () {
 
     // Category
-    Route::get('/categories/create', 'CategoryController@create')->name('category.create');
+    Route::group(['prefix' => 'categories', 'as' => 'category'], function () {
+        Route::get('', 'CategoryController@index')->name('.index');
+        Route::get('create', 'CategoryController@create')->name('.create');
+    });
 
     // Question
     Route::get('/questions/create', 'QuestionController@create')->name('question.create');

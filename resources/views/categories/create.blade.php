@@ -6,7 +6,7 @@
         <div class="col-10 bg-white ">
             <div class="my-4">
                 <div class="title">
-                    <a href="{{ route('material.index') }}" class="btn btn-secondary float-right mr-4">Back to list</a>
+                    <a href="{{ route('category.index') }}" class="btn btn-secondary float-right mr-4">Back to list</a>
                     <h1 class="p-2 mb-4 mx-4 border-bottom">Add New Category</h1>
                 </div>
                 <div class="col-8 m-auto">
