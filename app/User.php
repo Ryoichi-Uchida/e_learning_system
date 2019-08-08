@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'follows', 'following_id', 'followed_id')->withTimestamps();
     }
 
-    public function followed()
+    public function followers()
     {
         return $this->belongsToMany('App\User', 'follows', 'followed_id', 'following_id')->withTimestamps();
     }

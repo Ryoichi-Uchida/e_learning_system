@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'users', 'as' => 'user'], func
     Route::get('{user}/follow', 'UserController@follow')->name('.follow');
     Route::get('{user}/unfollow', 'UserController@unfollow')->name('.unfollow');
     Route::get('{user}/following', 'UserController@following')->name('.following');
-    Route::get('{user}/followed', 'UserController@followed')->name('.followed'); 
+    Route::get('{user}/followers', 'UserController@followers')->name('.followers'); 
 });
 
 // Admin

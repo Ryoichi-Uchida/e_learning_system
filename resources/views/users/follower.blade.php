@@ -10,19 +10,19 @@
         <div class="col-8 bg-white py-4">
             <h2 class="pb-4">{{ $user->name }}'s followers</h2>
             <div class="row">
-                {{-- The case this user doesn't have any followed member and is auth --}}
+                {{-- The case this user doesn't have any follower and is auth --}}
                 @if(empty($users->count()) && Auth::user()->id == $user->id)
                     <div class="text-danger text-center mx-auto">
                         <h1>You don't have follower yet</h1>
                         <h2><a href="{{ route('home.show') }}"> >> Return to your profile << </a></h2>
                     </div>
-                {{-- The case this user doesn't have any followed member and is other --}}
+                {{-- The case this user doesn't have any follower and is other --}}
                 @elseif(empty($users->count()) && Auth::user()->id != $user->id)
                     <div class="text-danger text-center mx-auto">
                         <h1>The member doesn't have follower yet</h1>
                         <h2><a href="{{ route('user.show', ['user' => $user->id]) }}"> >> Back to this user's page << </a></h2>
                     </div>
-                {{-- The case this user has any followed member --}}
+                {{-- The case this user has some followers --}}
                 @else
                     @foreach ($users as $user)
                         <div class="col-6">

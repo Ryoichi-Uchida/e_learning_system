@@ -23,7 +23,7 @@
                             <h4>Following</h4>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('user.followed', ['user' => Auth::user()->id]) }}"><h4>{{ Auth::user()->followed()->count() }}</h4></a>
+                            <a href="{{ route('user.followers', ['user' => Auth::user()->id]) }}"><h4>{{ Auth::user()->followers()->count() }}</h4></a>
                             <h4>Followers</h4>
                         </div>
                     </div>
