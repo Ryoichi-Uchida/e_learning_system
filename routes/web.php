@@ -34,5 +34,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'users', 'as' => 'user'], func
     Route::get('{user}', 'UserController@show')->name('.show');  
 });
 
-// Material
-Route::get('/materials', 'MaterialController@index')->middleware('admin')->name('material.index');
+// Admin
+Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], function () {
+
+    // Category
+    Route::group(['prefix' => 'categories', 'as' => 'category'], function () {
+        Route::get('', 'CategoryController@index')->name('.index');
+        Route::get('create', 'CategoryController@create')->name('.create');
+    });
+
+    // Question
+    Route::get('/questions/create', 'QuestionController@create')->name('question.create');
+
+});
+
+

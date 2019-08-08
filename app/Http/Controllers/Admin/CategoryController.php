@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class MaterialController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,7 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        return view('materials.index');
+        return view('categories.index');
     }
 
     /**
@@ -23,7 +24,7 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
