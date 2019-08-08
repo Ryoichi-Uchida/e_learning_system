@@ -35,4 +35,23 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function following()
+    {
+        return $this->belongsToMany('App\user', 'follows', 'following_id', 'followed_id')->withTimestamps();
+    }
+
+    public function followed()
+    {
+        return $this->belongsToMany('App\user', 'follows', 'followed_id', 'following_id')->withTimestamps();
+    }
+
+    public function is_following($id)
+    {
+        if(!empty($this->following()->where('followed_id', $id)->first())){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
