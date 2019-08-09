@@ -12,16 +12,16 @@
                 <div class="pb-3 mt-3 border-bottom">
                     <img src="/images/{{ $user->avatar }}" alt="" class="mb-3 avatar">
                     <h2 class="mb-3">{{ $user->name }}</h2>
-                    <a href="" class="btn btn-primary">Follow</a>
+                    @include('../partials/follow_button')
                 </div>
                 <div class="p-2 my-3">
                     <div class="row border-bottom pb-3">
                         <div class="col-md-6">
-                            <a href=""><h4>20</h4></a>
+                            <a href="{{ route('user.following', ['user' => $user->id]) }}"><h4>{{ $user->following()->count() }}</h4></a>
                             <h4>Following</h4>
                         </div>
                         <div class="col-md-6">
-                            <a href=""><h4>30</h4></a>
+                            <a href="{{ route('user.followers', ['user' => $user->id]) }}"><h4>{{ $user->followers()->count() }}</h4></a>
                             <h4>Followers</h4>
                         </div>
                     </div>

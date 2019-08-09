@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $users = User::whereNotIn('id', [Auth::user()->id])->paginate(10);
         
-        return view('users.index',compact('users'));
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -84,5 +84,39 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Add and delete the specified relationship in storage.
+     */
+    public function follow(User $user)
+    {
+        Auth::user()->following()->attach($user);
+
+        return redirect()->back();
+    }
+    
+    public function unfollow(User $user)
+    {
+        Auth::user()->following()->detach($user);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Display a listing of the following and follwed.
+     */
+    public function following(User $user)
+    {
+        $users = $user->following()->paginate(10);
+
+        return view('users.following', compact('users', 'user'));
+    }
+
+    public function followers(User $user)
+    {
+        $users = $user->followers()->paginate(10);       
+
+        return view('users.followers', compact('users', 'user'));
     }
 }
