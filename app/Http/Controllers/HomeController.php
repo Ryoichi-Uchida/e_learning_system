@@ -47,58 +47,45 @@ class HomeController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update_name(Request $request)
+    public function update(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255']
+            'name' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'new_password' => ['nullable', 'string', 'min:6', 'confirmed']
         ]);
 
-        Auth::user()->update([
-            'name' =>  $request->name
-        ]);
+        if(!empty($request->avatar)){
+            $request->validate([
+                'avatar' => ['mimes:jpeg,jpg,png,gif', 'max:1024']
+            ]);
 
-        return redirect()->route('home');
-    }
+            $imageName = time() . '.' . $request->avatar->getClientOriginalExtension();
 
-    public function update_email(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
-        ]);
+            Auth::user()->update([
+                'avatar' => $imageName
+            ]);
 
-        Auth::user()->update([
-            'email' => $request->email
-        ]);
+            $request->avatar->move(public_path('images'), $imageName);
+        }
 
-        return redirect()->route('home');
-    }
+        if(!empty($request->name)){
+            Auth::user()->update([
+                'name' => $request->name
+            ]);
+        }
 
-    public function update_avatar(Request $request)
-    {
-        $request->validate([
-            'avatar' => ['required', 'mimes:jpeg,jpg,png,gif', 'max:1024']
-        ]);
+        if(!empty($request->email)){
+            Auth::user()->update([
+                'email' => $request->email
+            ]);
+        }
 
-        $imageName = time() . '.' . $request->avatar->getClientOriginalExtension();
-        
-        Auth::user()->update([
-            'avatar' => $imageName
-        ]);
-        
-        $request->avatar->move(public_path('images'), $imageName);
-
-        return redirect()->route('home');
-    }
-
-    public function update_password(Request $request)
-    {
-        $request->validate([
-            'new_password' => ['required', 'string', 'min:6', 'confirmed']
-        ]);
-
-        Auth::user()->update([
-            'password' => bcrypt($request->new_password)
-        ]);
+        if(!empty($request->new_password)){
+            Auth::user()->update([
+                'password' => bcrypt($request->new_password)
+            ]);
+        }
 
         return redirect()->route('home');
     }
