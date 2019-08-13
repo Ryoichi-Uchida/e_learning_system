@@ -51,15 +51,6 @@ class QuestionController extends Controller
             'answer' => ['required']
         ]);
 
-        // foreach ($request->options as $option) {
-        //     if($option == null && $request->answer == $option){
-        //         $request->validate([
-
-        //         ]);
-        //     }
-        // }
-
-
         //Making a new question
         $question = new Question();
         $question->content = $request->question;
@@ -81,13 +72,31 @@ class QuestionController extends Controller
         $question->options()->save($option);
 
         //If you make more option...
-        // $option = new Option();
-        // $option->content = $request->option2;
-        // if($request->answer == $request->option2)
-        //     $option->is_correct = '1';
-        // $category->options()->save($option);
+        if($request->option3 != null){
+            $option = new Option();
+            $option->content = $request->option3;
+            if($request->answer == 'option3')
+                $option->is_correct = '1';
+            $question->options()->save($option);
+        }
 
-        return view('categories.index');
+        if($request->option4 != null){
+            $option = new Option();
+            $option->content = $request->option4;
+            if($request->answer == 'option4')
+                $option->is_correct = '1';
+            $question->options()->save($option);
+        }
+        
+        if($request->option5 != null){
+            $option = new Option();
+            $option->content = $request->option5;
+            if($request->answer == 'option5')
+                $option->is_correct = '1';
+            $question->options()->save($option);
+        }
+
+        return redirect()->route('question.create', ['category' => $category->id]);
     }
 
     /**

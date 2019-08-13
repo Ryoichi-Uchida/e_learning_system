@@ -10,7 +10,7 @@
         <div class="col-10 bg-white">
             <div class="my-4">
                 <div class="title">
-                    <a href="{{ route('category.create') }}" class="btn btn-secondary float-right mr-4">Back to Category</a>
+                    <a href="{{ route('category.index') }}" class="btn btn-secondary float-right mr-4">Back to Index</a>
                     <h1 class="p-2 mb-4 mx-4 border-bottom">Add New Question</h1>
                 </div>
                 <form action="{{ route('question.store',['category' => $category->id]) }}" method="post">
@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <h3 class="mb-0">Please input a Question</h3>
                                 <span class="text-danger">*Required!</span>
-                                <textarea name="question" cols="10" rows="5" class="form-control"></textarea>
+                                <textarea name="question" cols="10" rows="5" class="form-control">{{ old('question') }}</textarea>
                                 @if ($errors->has('question'))
                                     <p class="text-danger">{{ $errors->first('question') }}</p>
                                 @endif
@@ -45,7 +45,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-10">
-                                            <input type="text" name="option1" class="form-control">
+                                            <input type="text" name="option1" class="form-control" value="{{ old('option1') }}">
                                             @if ($errors->has('option1'))
                                                 <p class="text-danger">{{ $errors->first('option1') }}</p>
                                             @endif
@@ -60,7 +60,7 @@
                                     <label>2nd Option <span class="text-danger">*Required!</span></label>
                                     <div class="row">
                                         <div class="col-10">
-                                            <input type="text" name="option2" class="form-control">
+                                            <input type="text" name="option2" class="form-control" value="{{ old('option2') }}">
                                             @if ($errors->has('option2'))
                                                 <p class="text-danger">{{ $errors->first('option2') }}</p>
                                             @endif
@@ -75,7 +75,7 @@
                                     <label>3rd Option <span class="text-primary">*optional</span></label>
                                     <div class="row">
                                         <div class="col-10">
-                                            <input type="text" name="option3" class="form-control">
+                                            <input type="text" name="option3" class="form-control" value="{{ old('option3') }}">
                                             @if ($errors->has('option3'))
                                                 <p class="text-danger">{{ $errors->first('option3') }}</p>
                                             @endif
@@ -90,7 +90,7 @@
                                     <label>4th Option <span class="text-primary">*optional</span></label>
                                     <div class="row">
                                         <div class="col-10">
-                                            <input type="text" name="option4" class="form-control">
+                                            <input type="text" name="option4" class="form-control" value="{{ old('option4') }}">
                                             @if ($errors->has('option4'))
                                                 <p class="text-danger">{{ $errors->first('option4') }}</p>
                                             @endif
@@ -105,7 +105,7 @@
                                     <label>5th Option <span class="text-primary">*optional</span></label>
                                     <div class="row">
                                         <div class="col-10">
-                                            <input type="text" name="option5" class="form-control">
+                                            <input type="text" name="option5" class="form-control" value="{{ old('option5') }}">
                                             @if ($errors->has('option5'))
                                                 <p class="text-danger">{{ $errors->first('option5') }}</p>
                                             @endif
@@ -117,7 +117,6 @@
                                 </div>
                                 
                             </div>
-                            <button type="submit" class="btn btn-success float-right mx-2">Save & Back to List</button>
                             <button type="submit" class="btn btn-primary float-right mx-2">Save & Add other Question</button>
                         </div>
                     </div>
