@@ -1,5 +1,5 @@
 {{-- I will display avatar only in the activity area of Dashboard  --}}
-@if (Request::url() == 'http://localhost:8080/home')
+@if (Route::currentRouteName() == 'home')
     <div class="bg-white border p-3 m-3">
         <div class="row">
             <div class="col-2">

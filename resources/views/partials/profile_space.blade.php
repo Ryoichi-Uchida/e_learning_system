@@ -6,7 +6,7 @@
         @if ($check_user->id == Auth::user()->id)
             <h5 class="mb-3">{{ $check_user->email }}</h5>
             {{-- The case of Auth user's Dashboard  --}}
-            @if (Request::url() == 'http://localhost:8080/home')
+            @if (Route::currentRouteName() == 'home')
                 <a href="{{ route('home.show') }}" class="btn btn-primary mr-2">Your Page</a>
             @endif
             <a href="{{ route('home.edit') }}" class="btn btn-success">Update Profile</a>
