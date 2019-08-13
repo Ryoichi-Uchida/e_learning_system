@@ -10,17 +10,24 @@
                     <h1 class="p-2 mb-4 mx-4 border-bottom">Add New Category</h1>
                 </div>
                 <div class="col-8 m-auto">
-                    <form action="" method="post">
+                    <form action="{{ route('category.store') }}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control">
+                            @if ($errors->has('title'))
+                                <p class="text-danger">{{ $errors->first('title') }}</p>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <label for="">Description</label>
+                            <label for="description">Description</label>
                             <textarea name="description" cols="30" rows="10" class="form-control"></textarea>
+                            @if ($errors->has('description'))
+                                <p class="text-danger">{{ $errors->first('description') }}</p>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary float-right">Go to making Question</button>
+                            <button type="submit" class="btn btn-primary float-right">Save & Go to making Question</button>
                         </div>
                     </form>
                 </div>

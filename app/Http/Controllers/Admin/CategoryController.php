@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $categories = Category::select('*')->paginate(15);
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -35,7 +38,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => ['required', 'unique:categories', 'max:255'],
+            'description' => ['required', 'min:10', 'max:255']
+        ]);
+
+        $category = Category::create($request->all());
+        
+        return redirect()->route('question.create', ['category' => $category->id]);
+
     }
 
     /**
@@ -44,9 +55,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        $questions = $category->questions()->get();
+        return view('categories.show', compact('category'), compact('questions'));
     }
 
     /**
