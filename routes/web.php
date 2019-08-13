@@ -22,10 +22,7 @@ Route::group(['prefix' => 'home', 'as' => 'home'], function () {
     Route::get('', 'HomeController@index')->name('');
     Route::get('show', 'HomeController@show')->name('.show');
     Route::get('edit', 'HomeController@edit')->name('.edit');
-    Route::patch('update_name', 'HomeController@update_name')->name('.update_name');
-    Route::patch('update_email', 'HomeController@update_email')->name('.update_email');
-    Route::patch('update_avatar', 'HomeController@update_avatar')->name('.update_avatar');
-    Route::patch('update_password', 'HomeController@update_password')->name('.update_password');
+    Route::patch('update', 'HomeController@update')->name('.update');
 });
 
 // User
