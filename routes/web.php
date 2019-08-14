@@ -52,6 +52,6 @@ Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], functio
 // Lesson
 Route::group(['prefix' => 'lessons', 'middleware' => 'auth', 'as' => 'lesson'], function(){
     Route::get('', 'LessonController@index')->name('.index');
-    Route::get('create', 'LessonController@create')->name('.create');
-    Route::get('show', 'LessonController@show')->name('.show');
+    Route::get('question_show', 'LessonController@question_show')->name('.question_show');
+    Route::get('result', 'LessonController@result')->name('.result');
 });

@@ -23,7 +23,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-        return view('lessons.create');
+        //
     }
 
     /**
@@ -45,7 +45,7 @@ class LessonController extends Controller
      */
     public function show()
     {
-        return view('lessons.show');
+        //
     }
 
     /**
@@ -80,5 +80,26 @@ class LessonController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Show the questions to users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function question_show()
+    {
+        return view('lessons.question_show');
+    }
+
+    /**
+     * Show the lesson result to users.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function result()
+    {
+        return view('lessons.result');
     }
 }
