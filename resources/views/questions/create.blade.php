@@ -9,6 +9,11 @@
     <div class="row d-flex justify-content-center">
         <div class="col-10 bg-white">
             <div class="my-4">
+                @if (session('status'))
+                    <div class="alert alert-success text-center">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="title">
                     <a href="{{ route('category.index') }}" class="btn btn-secondary float-right mr-4">Back to Index</a>
                     <h1 class="p-2 mb-4 mx-4 border-bottom">Add New Question</h1>

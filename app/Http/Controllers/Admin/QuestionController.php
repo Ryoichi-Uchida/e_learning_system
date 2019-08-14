@@ -89,7 +89,7 @@ class QuestionController extends Controller
             }
         }
 
-        return redirect()->route('question.create', ['category' => $category]);
+        return redirect()->route('question.create', ['category' => $category])->with('status', 'New Question added!');
     }
 
     /**
