@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
+use App\Question;
+use App\Option;
 
 class QuestionController extends Controller
 {
@@ -22,9 +25,9 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Category $category)
     {
-        return view('questions.create');
+        return view('questions.create', compact('category'));
     }
 
     /**
@@ -33,9 +36,60 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'question' => ['required', 'max:255'],
+            'option1' => ['required', 'max:255'],
+            'option2' => ['required', 'max:255'],
+            'option3' => ['max:255'],
+            'option4' => ['max:255'],
+            'option5' => ['max:255'],
+            'answer' => ['required']
+        ]);
+
+        //Making a new question
+        $question = $category->questions()->create(['content' => $request->question]);
+
+        //Making option1 and 2(required)
+        if($request->answer == 'option1'){
+            $question->options()->create(['content' => $request->option1, 'is_correct' => '1']);
+        }else{
+            $question->options()->create(['content' => $request->option1]);
+        }
+
+        if($request->answer == 'option2'){
+            $question->options()->create(['content' => $request->option2, 'is_correct' => '1']);
+        }else{
+            $question->options()->create(['content' => $request->option2]);
+        }
+
+        // //Making option3 to 5(optional)
+        if($request->option3 != null){
+            if($request->answer == 'option3'){
+                $question->options()->create(['content' => $request->option3, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option3]);
+            }
+        }
+
+        if($request->option4 != null){
+            if($request->answer == 'option4'){
+                $question->options()->create(['content' => $request->option4, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option4]);
+            }
+        }
+
+        if($request->option5 != null){
+            if($request->answer == 'option5'){
+                $question->options()->create(['content' => $request->option5, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option5]);
+            }
+        }
+
+        return redirect()->route('question.create', ['category' => $category])->with('status', 'New Question added!');
     }
 
     /**
