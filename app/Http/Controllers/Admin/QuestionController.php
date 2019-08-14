@@ -49,50 +49,47 @@ class QuestionController extends Controller
         ]);
 
         //Making a new question
-        $question = new Question();
-        $question->content = $request->question;
-        $category->questions()->save($question);
-
+        $question = $category->questions()->create(['content' => $request->question]);
 
         //Making option1 and 2(required)
-        $option = new Option();
-        $option->content = $request->option1;
-        if($request->answer == 'option1')
-            $option->is_correct = '1';
-        $question->options()->save($option);
+        if($request->answer == 'option1'){
+            $question->options()->create(['content' => $request->option1, 'is_correct' => '1']);
+        }else{
+            $question->options()->create(['content' => $request->option1]);
+        }
 
-        $option = new Option();
-        $option->content = $request->option2;
-        if($request->answer == 'option2')
-            $option->is_correct = '1';
-        $question->options()->save($option);
+        if($request->answer == 'option2'){
+            $question->options()->create(['content' => $request->option2, 'is_correct' => '1']);
+        }else{
+            $question->options()->create(['content' => $request->option2]);
+        }
 
-        //Making option3 to 5(optional)
+        // //Making option3 to 5(optional)
         if($request->option3 != null){
-            $option = new Option();
-            $option->content = $request->option3;
-            if($request->answer == 'option3')
-                $option->is_correct = '1';
-            $question->options()->save($option);
+            if($request->answer == 'option3'){
+                $question->options()->create(['content' => $request->option3, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option3]);
+            }
         }
 
         if($request->option4 != null){
-            $option = new Option();
-            $option->content = $request->option4;
-            if($request->answer == 'option4')
-                $option->is_correct = '1';
-            $question->options()->save($option);
-        }
-        
-        if($request->option5 != null){
-            $option = new Option();
-            $option->content = $request->option5;
-            if($request->answer == 'option5')
-                $option->is_correct = '1';
-            $question->options()->save($option);
+            if($request->answer == 'option4'){
+                $question->options()->create(['content' => $request->option4, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option4]);
+            }
         }
 
-        return redirect()->route('question.create', ['category' => $category->id]);
+        if($request->option5 != null){
+            if($request->answer == 'option5'){
+                $question->options()->create(['content' => $request->option5, 'is_correct' => '1']);
+            }else{
+                $question->options()->create(['content' => $request->option5]);
+            }
+        }
+
+        return redirect()->route('question.create', ['category' => $category]);
     }
 
     /**
