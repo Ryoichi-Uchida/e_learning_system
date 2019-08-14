@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        $questions = $category->questions();
+        $questions = $category->questions;
 
         return view('categories.show', compact('category', 'questions'));
     }
