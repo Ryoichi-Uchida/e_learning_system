@@ -38,9 +38,6 @@ class QuestionController extends Controller
      */
     public function store(Request $request, Category $category)
     {
-        
-        // dd($request->all());
-
         $request->validate([
             'question' => ['required', 'max:255'],
             'option1' => ['required', 'max:255'],
@@ -57,21 +54,20 @@ class QuestionController extends Controller
         $category->questions()->save($question);
 
 
-        //Making option1
+        //Making option1 and 2(required)
         $option = new Option();
         $option->content = $request->option1;
         if($request->answer == 'option1')
             $option->is_correct = '1';
         $question->options()->save($option);
 
-        //Making option2
         $option = new Option();
         $option->content = $request->option2;
         if($request->answer == 'option2')
             $option->is_correct = '1';
         $question->options()->save($option);
 
-        //If you make more option...
+        //Making option3 to 5(optional)
         if($request->option3 != null){
             $option = new Option();
             $option->content = $request->option3;

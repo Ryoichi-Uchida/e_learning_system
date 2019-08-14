@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('*')->paginate(15);
+        $categories = Category::paginate(15);
 
         return view('categories.index', compact('categories'));
     }
@@ -46,7 +46,6 @@ class CategoryController extends Controller
         $category = Category::create($request->all());
         
         return redirect()->route('question.create', ['category' => $category->id]);
-
     }
 
     /**
@@ -58,7 +57,8 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         $questions = $category->questions()->get();
-        return view('categories.show', compact('category'), compact('questions'));
+
+        return view('categories.show', compact('category', 'questions'));
     }
 
     /**
