@@ -28,7 +28,11 @@
         <div class="row">
             <div class="col-12">
                 <div class=" py-3 my-3 bg-gray">
-                    <a href=""><h4>30</h4></a>
+                    @if ($check_user->id == Auth::user()->id)
+                        <a href="{{ route('lesson.words') }}"><h4>30</h4></a>    
+                    @else
+                        <h4>30</h4>
+                    @endif
                     <h4>Learned Words</h4>
                 </div>
             </div>
