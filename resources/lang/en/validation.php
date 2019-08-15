@@ -144,6 +144,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'option.1' => 'Option1',
+        'option.2' => 'Option2',
+        'option.3' => 'Option3',
+        'option.4' => 'Option4',
+        'option.5' => 'Option5',
+    ],
 
 ];
