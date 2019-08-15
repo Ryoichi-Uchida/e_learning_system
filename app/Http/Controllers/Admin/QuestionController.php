@@ -40,52 +40,26 @@ class QuestionController extends Controller
     {
         $request->validate([
             'question' => ['required', 'max:255'],
-            'option1' => ['required', 'max:255'],
-            'option2' => ['required', 'max:255'],
-            'option3' => ['max:255'],
-            'option4' => ['max:255'],
-            'option5' => ['max:255'],
+            'option.1' => ['required'],
+            'option.2' => ['required'],
+            'option.3' => ['nullable', 'required_if:answer,3'],
+            'option.4' => ['nullable', 'required_if:answer,4'],
+            'option.5' => ['nullable', 'required_if:answer,5'],
+            'option.*' => ['distinct', 'max:255'],
             'answer' => ['required']
         ]);
 
         //Making a new question
         $question = $category->questions()->create(['content' => $request->question]);
 
-        //Making option1 and 2(required)
-        if($request->answer == 'option1'){
-            $question->options()->create(['content' => $request->option1, 'is_correct' => '1']);
-        }else{
-            $question->options()->create(['content' => $request->option1]);
-        }
-
-        if($request->answer == 'option2'){
-            $question->options()->create(['content' => $request->option2, 'is_correct' => '1']);
-        }else{
-            $question->options()->create(['content' => $request->option2]);
-        }
-
-        // //Making option3 to 5(optional)
-        if($request->option3 != null){
-            if($request->answer == 'option3'){
-                $question->options()->create(['content' => $request->option3, 'is_correct' => '1']);
-            }else{
-                $question->options()->create(['content' => $request->option3]);
-            }
-        }
-
-        if($request->option4 != null){
-            if($request->answer == 'option4'){
-                $question->options()->create(['content' => $request->option4, 'is_correct' => '1']);
-            }else{
-                $question->options()->create(['content' => $request->option4]);
-            }
-        }
-
-        if($request->option5 != null){
-            if($request->answer == 'option5'){
-                $question->options()->create(['content' => $request->option5, 'is_correct' => '1']);
-            }else{
-                $question->options()->create(['content' => $request->option5]);
+        //Making options
+        foreach($request->option as $key => $option){
+            if($option != null){
+                if($request->answer == $key){
+                    $question->options()->create(['content' => $option, 'is_correct' => '1']);
+                }else{
+                    $question->options()->create(['content' => $option]);
+                }
             }
         }
 
