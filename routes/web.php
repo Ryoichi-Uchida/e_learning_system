@@ -44,12 +44,14 @@ Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], functio
         Route::get('create', 'CategoryController@create')->name('.create');
         Route::post('', 'CategoryController@store')->name('.store');
         Route::get('{category}/show', 'CategoryController@show')->name('.show');
+        Route::delete('{category}', 'CategoryController@destroy')->name('.destroy');
     });
 
     // Question
     Route::group(['prefix' => 'questions', 'as' => 'question'], function () {
         Route::get('{category}/create', 'QuestionController@create')->name('.create');
         Route::post('{category}', 'QuestionController@store')->name('.store');
+        Route::delete('{question}', 'QuestionController@destroy')->name('.destroy');
     });
 
 });

@@ -8,7 +8,13 @@
 
 <div class="container mt-3">
     <div class="border-bottom my-4 pb-3">
-        <a href="" class="btn btn-danger float-right ml-2">Delete</a>
+        <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger float-right ml-2">
+                <span>Delete</span>
+            </button>
+        </form>
         <a href="" class="btn btn-success float-right">Edit</a> 
         <h2>Title : {{ $category->title }}</h2>
         <h2>Description : {{ $category->description }}</h2>
@@ -52,7 +58,13 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <a href="" class="btn btn-outline-success mx-1">Edit</a>
-                                    <a href="" class="btn btn-outline-danger mx-1">Delete</a>
+                                    <form action="{{ route('question.destroy', ['question' => $question->id]) }}" method="post" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger">
+                                            <span>Delete</span>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
