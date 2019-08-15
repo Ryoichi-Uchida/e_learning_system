@@ -8,7 +8,7 @@
 
 <div class="container mt-3">
     <div class="border-bottom my-4 pb-3">
-        <form action="{{ route('category.destroy',['category' => $category->id]) }}" method="post">
+        <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger float-right ml-2">
