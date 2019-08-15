@@ -102,4 +102,13 @@ class LessonController extends Controller
     {
         return view('lessons.result');
     }
+
+     /** Display a listing of one user's learned words.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function words()
+    {
+        return view('lessons.words');
+    }
 }
