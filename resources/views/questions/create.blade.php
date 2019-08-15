@@ -71,7 +71,7 @@
                                                 @endif
                                             </div>
                                             <div class="col-2 text-center pt-1">
-                                                <input type="radio" name="answer" value="{{ $i }}">
+                                                <input type="radio" name="answer" value="{{ $i }}" {{ old('answer') == $i ? 'checked' : '' }}>
                                             </div>
                                         </div>
                                     </div>
