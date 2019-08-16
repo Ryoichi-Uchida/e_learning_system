@@ -15,7 +15,7 @@
                 <span>Delete</span>
             </button>
         </form>
-        <a href="" class="btn btn-success float-right">Edit</a> 
+        <a href="{{ route('category.edit', ['category' => $category->id]) }}" class="btn btn-success float-right">Edit</a> 
         <h2>Title : {{ $category->title }}</h2>
         <h2>Description : {{ $category->description }}</h2>
     </div>
@@ -57,7 +57,7 @@
                                     @endforeach
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="" class="btn btn-outline-success mx-1">Edit</a>
+                                    <a href="{{ route('question.edit', ['question' => $question->id]) }}" class="btn btn-outline-success mx-1">Edit</a>
                                     <form action="{{ route('question.destroy', ['question' => $question->id]) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')

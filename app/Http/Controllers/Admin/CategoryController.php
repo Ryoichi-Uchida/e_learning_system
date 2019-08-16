@@ -67,9 +67,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -79,9 +79,30 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'title' => ['nullable', 'unique:categories', 'max:255'],
+            'description' => ['nullable', 'min:10', 'max:255']
+        ],[
+            'title.unique' => "The title has already been used. If you don't want to change, please change this field to empty."
+        ]);
+
+        if(!empty($request->title)){
+            $category->update([
+                'title' => $request->title
+            ]);
+        }
+
+        if(!empty($request->description)){
+            $category->update([
+                'description' => $request->description
+            ]);
+        }
+
+        // $category = Category::create($request->all());
+        
+        return redirect()->route('category.show', ['category' => $category]);
     }
 
     /**
