@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container border-bottom">
-        <a href="{{ route('category.index') }}" class="btn btn-secondary float-right">Back to list</a>
+        <a href="{{ route('category.index') }}" class="btn btn-secondary float-right">Back to Category list</a>
     <h1>Lesson Editor</h1>    
 </div>
 
@@ -15,7 +15,7 @@
                 <span>Delete</span>
             </button>
         </form>
-        <a href="" class="btn btn-success float-right">Edit</a> 
+        <a href="{{ route('category.edit', ['category' => $category->id]) }}" class="btn btn-success float-right">Edit</a> 
         <h2>Title : {{ $category->title }}</h2>
         <h2>Description : {{ $category->description }}</h2>
     </div>
@@ -29,19 +29,21 @@
         </div>
         <div class="row d-flex justify-content-center">
             <div class="col-10">
-                <table class="table table-striped">
-                    <thead class="h3 text-center">
+                <table class="table table-striped table-bordered">
+                    <thead class="h3 text-center bg-info">
                         <tr>
+                            <th style="width:10%;">No.</th>
                             <th style="width:40%;">Question</th>
                             <th style="width:20%;">Options</th>
-                            <th style="width:20%;">Answer</th>
+                            <th style="width:10%;">Answer</th>
                             <th style="width:20%;">Functions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($questions as $question)
+                        @foreach ($questions as $key => $question)
                             <tr>
-                                <td class="align-middle"><a href="">{{ $question->content }}</a></td>
+                                <td class="align-middle text-center"><p>{{ $key+1 }}</p></td>
+                                <td class="align-middle"><p>{{ $question->content }}</p></td>
                                 <td>
                                     @foreach ($question->options()->get() as $option)
                                         <p>{{ $option->content }}</p>                                        
@@ -57,7 +59,7 @@
                                     @endforeach
                                 </td>
                                 <td class="align-middle text-center">
-                                    <a href="" class="btn btn-outline-success mx-1">Edit</a>
+                                    <a href="{{ route('question.edit', ['question' => $question->id]) }}" class="btn btn-outline-success mx-1">Edit</a>
                                     <form action="{{ route('question.destroy', ['question' => $question->id]) }}" method="post" class="d-inline">
                                         @csrf
                                         @method('DELETE')
