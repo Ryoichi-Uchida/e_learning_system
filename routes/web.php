@@ -39,23 +39,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'users', 'as' => 'user'], func
 Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], function () {
 
     // Category
-    Route::group(['prefix' => 'categories', 'as' => 'category'], function () {
-        Route::get('', 'CategoryController@index')->name('.index');
-        Route::get('create', 'CategoryController@create')->name('.create');
-        Route::post('', 'CategoryController@store')->name('.store');
-        Route::get('{category}/show', 'CategoryController@show')->name('.show');
-        Route::get('{category}/edit', 'CategoryController@edit')->name('.edit');
-        Route::patch('{category}', 'CategoryController@update')->name('.update');
-        Route::delete('{category}', 'CategoryController@destroy')->name('.destroy');
-    });
+    Route::resource('category', 'CategoryController');
 
-    // Question
+    // Question(resources)
+    Route::resource('question', 'QuestionController', [
+        'only' => ['edit', 'update', 'destroy']
+    ]);
+
+    // Question(others)
     Route::group(['prefix' => 'questions', 'as' => 'question'], function () {
         Route::get('{category}/create', 'QuestionController@create')->name('.create');
         Route::post('{category}', 'QuestionController@store')->name('.store');
-        Route::get('{question}/edit', 'QuestionController@edit')->name('.edit');
-        Route::patch('{question}', 'QuestionController@update')->name('.update');
-        Route::delete('{question}', 'QuestionController@destroy')->name('.destroy');
     });
 
 });
