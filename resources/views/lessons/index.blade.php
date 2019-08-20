@@ -13,43 +13,30 @@
         <h1>Lesson list</h1>      
     </div>
     <div class="row">
-        <div class="col-6">
-            <div class="border p-3 mb-4 lesson-list">
-                <h2>Lesson Title</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quia magni dignissimos in inventore ipsa reiciendis alias, vel fuga</p>
-                <div class="text-right">
-                    <a href="" class="btn btn-primary">Start</a>
+        @foreach ($categories as $category)
+            <div class="col-6">
+                <div class="border p-3 mb-4 lesson-list">
+                    <h2>{{ $category->title }}</h2>
+                    <p>{{ $category->description }}</p>
+                    <div class="text-right">
+                        @if (!empty(Auth::user()->lessons->where('category_id', $category->id)->first()->answers))
+                            @if(Auth::user()
+                                    ->lessons->where('category_id', $category->id)->first()
+                                    ->answers->count() == $category->questions->count())
+                                <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                            @else
+                                <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
+                            @endif
+                        @else
+                            <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-6">
-            <div class="border p-3 mb-4 lesson-list">
-                <span class="score float-right bg-primary text-white px-2">Score : 3 of 5</span>
-                <h2>Lesson Title</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quia magni dignissimos in inventore ipsa reiciendis alias, vel fuga</p>
-                <div class="text-right">
-                    <a href="" class="btn btn-outline-secondary">Your Result</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="border p-3 mb-4 lesson-list">
-                <h2>Lesson Title</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quia magni dignissimos in inventore ipsa reiciendis alias, vel fuga</p>
-                <div class="text-right">
-                    <a href="" class="btn btn-primary">Start</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="border p-3 mb-4 lesson-list">
-                <h2>Lesson Title</h2>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur quia magni dignissimos in inventore ipsa reiciendis alias, vel fuga</p>
-                <div class="text-right">
-                    <a href="" class="btn btn-primary">Start</a>
-                </div>
-            </div>
-        </div>
+        @endforeach
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $categories->links() }}
     </div>
 </div>  
 @endsection

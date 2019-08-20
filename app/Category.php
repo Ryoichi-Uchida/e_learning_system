@@ -12,4 +12,9 @@ class Category extends Model
     {
         return $this->hasMany('App\Question');
     }
+
+    public function lessons()
+    {
+        return $this->hasMany('App\Lesson', 'category_id');
+    }
 }
