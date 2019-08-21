@@ -18,7 +18,6 @@ class CreateUserCategoryTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('category_id');
             $table->timestamps();
-            $table->integer('next_question');
 
             $table->foreign('user_id')
                 ->references('id')
