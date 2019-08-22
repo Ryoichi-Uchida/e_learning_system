@@ -47,9 +47,9 @@ Route::group(['middleware' => ['auth', 'admin'], 'namespace' =>'Admin'], functio
     ]);
 
     // Question(others)
-    Route::group(['prefix' => 'questions', 'as' => 'question'], function () {
-        Route::get('{category}/create', 'QuestionController@create')->name('.create');
-        Route::post('{category}', 'QuestionController@store')->name('.store');
+    Route::group(['prefix' => 'categories/{category}/questions', 'as' => 'question'], function () {
+        Route::get('create', 'QuestionController@create')->name('.create');
+        Route::post('', 'QuestionController@store')->name('.store');
     });
 
 });
