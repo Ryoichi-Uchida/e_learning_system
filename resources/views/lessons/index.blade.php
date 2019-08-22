@@ -20,14 +20,16 @@
                         <h2>{{ $category->title }}</h2>
                         <p>{{ $category->description }}</p>
                         <div class="text-right">
-                            @if (!empty(Auth::user()->lessons->where('category_id', $category->id)->first()->answers))
-                                @if(Auth::user()
-                                        ->lessons->where('category_id', $category->id)->first()
-                                        ->answers->count() == $category->questions->count())
+                            {{-- The case user is starting this category  --}}
+                            @if(Auth::user()->is_lesson_starting($category->id))
+                                {{-- The case this category was finished  --}}
+                                @if(Auth::user()->finished_question_no($category->id) == $category->questions->count())
                                     <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                                {{-- The case this category is on the way  --}}
                                 @else
                                     <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
                                 @endif
+                            {{-- The case user isn't starting this category yet  --}}
                             @else
                                 <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
                             @endif

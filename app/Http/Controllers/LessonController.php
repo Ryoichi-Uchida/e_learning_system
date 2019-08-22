@@ -119,33 +119,31 @@ class LessonController extends Controller
     public function question_show(Category $category)
     {
         //It searches suspend point of a lesson.
-        if(!empty(Auth::user()
-                    ->lessons->where('category_id', $category->id)->first()
-                    ->answers)){
-            $finished_question_no = Auth::user()
-                                        ->lessons->where('category_id', $category->id)->first()
-                                        ->answers->count();
+        if(Auth::user()->is_lesson_starting($category->id)){
+            $finished = Auth::user()->finished_question_no($category->id);
         }else{
-            $finished_question_no = "";
+            $finished = "";
         }
 
         //It searches remaining question from $finished_question_no
-        if(!empty($category->questions[$finished_question_no])){
-            $next_question = $category->questions[$finished_question_no];
+        if(!empty($category->questions[$finished])){
+            $next = $category->questions[$finished];
         }else{
-            $next_question = "";
+            $next = "";
         }
 
         //If finished question is empty, it shows first question
-        if(empty($finished_question_no)){
+        if(empty($finished)){
             $question = $category->questions[0];
             
-            return view('lessons.question_show', compact('category', 'question', 'finished_question_no'));
+            return view('lessons.question_show', compact('category', 'question', 'finished'));
+        
         //If finished question & next question isn't empty, it shows next question
-        }elseif(!empty($finished_question_no) && !empty($next_question)){
-            $question = $next_question;
+        }elseif(!empty($finished) && !empty($next)){
+            $question = $next;
 
-            return view('lessons.question_show', compact('category', 'question', 'finished_question_no'));
+            return view('lessons.question_show', compact('category', 'question', 'finished'));
+        
         //It shows result
         }else{
             return redirect()->route('lesson.result',compact('category'));
