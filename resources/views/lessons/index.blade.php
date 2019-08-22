@@ -14,25 +14,27 @@
     </div>
     <div class="row">
         @foreach ($categories as $category)
-            <div class="col-6">
-                <div class="border p-3 mb-4 lesson-list">
-                    <h2>{{ $category->title }}</h2>
-                    <p>{{ $category->description }}</p>
-                    <div class="text-right">
-                        @if (!empty(Auth::user()->lessons->where('category_id', $category->id)->first()->answers))
-                            @if(Auth::user()
-                                    ->lessons->where('category_id', $category->id)->first()
-                                    ->answers->count() == $category->questions->count())
-                                <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+            @if (!empty($category->questions->first()))
+                <div class="col-6">
+                    <div class="border p-3 mb-4 lesson-list">
+                        <h2>{{ $category->title }}</h2>
+                        <p>{{ $category->description }}</p>
+                        <div class="text-right">
+                            @if (!empty(Auth::user()->lessons->where('category_id', $category->id)->first()->answers))
+                                @if(Auth::user()
+                                        ->lessons->where('category_id', $category->id)->first()
+                                        ->answers->count() == $category->questions->count())
+                                    <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                                @else
+                                    <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
+                                @endif
                             @else
                                 <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
                             @endif
-                        @else
-                            <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
-                        @endif
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         @endforeach
     </div>
     <div class="d-flex justify-content-center">
