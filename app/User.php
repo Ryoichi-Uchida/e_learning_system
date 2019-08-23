@@ -54,4 +54,25 @@ class User extends Authenticatable
             return false;
         }
     }
+
+    public function lessons()
+    {
+        return $this->hasMany('App\Lesson', 'user_id');
+    }
+
+    public function is_lesson_starting($id)
+    {
+        if(!empty($this->lessons->where('category_id', $id)->first()->answers)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function finished_question_no($id)
+    {
+        $count = $this->lessons->where('category_id', $id)->first()->answers->count();
+        return $count;
+    }
+
 }

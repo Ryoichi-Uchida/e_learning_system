@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Category;
+use App\Question;
+use App\Lesson;
+use App\Answer;
 
 class LessonController extends Controller
 {
@@ -13,7 +18,9 @@ class LessonController extends Controller
      */
     public function index()
     {
-        return view('lessons.index');
+        $categories = Category::paginate(10);
+
+        return view('lessons.index', compact('categories'));
     }
 
     /**
@@ -32,9 +39,31 @@ class LessonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Category $category, Question $question, Request $request)
     {
-        //
+        // If DB has the user's category, it gets category.
+        if(Lesson::where('user_id', Auth::user()->id)->where('category_id', $category->id)->first()){
+
+            $lesson = Lesson::where('user_id', Auth::user()->id)
+                                ->where('category_id', $category->id)
+                                ->first();
+        // If DB doesn't have the user's category, it makes new category.                      
+        }else{
+            $lesson =
+                Lesson::create([
+                    'user_id' => Auth::user()->id,
+                    'category_id' => $category->id
+                ]);
+        }
+
+        //Create new answer
+        Answer::create([
+            'user_category_id' => $lesson->id,
+            'question_id' => $question->id,
+            'option_id' => $request->answer
+        ]);
+
+        return redirect()->route('lesson.question_show', ['category' => $category->id]);
     }
 
     /**
@@ -87,9 +116,38 @@ class LessonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function question_show()
+    public function question_show(Category $category)
     {
-        return view('lessons.question_show');
+        //It searches suspend point of a lesson.
+        if(Auth::user()->is_lesson_starting($category->id)){
+            $finished = Auth::user()->finished_question_no($category->id);
+        }else{
+            $finished = "";
+        }
+
+        //It searches remaining question from $finished_question_no
+        if(!empty($category->questions[$finished])){
+            $next = $category->questions[$finished];
+        }else{
+            $next = "";
+        }
+
+        //If finished question is empty, it shows first question
+        if(empty($finished)){
+            $question = $category->questions[0];
+            
+            return view('lessons.question_show', compact('category', 'question', 'finished'));
+        
+        //If finished question & next question isn't empty, it shows next question
+        }elseif(!empty($finished) && !empty($next)){
+            $question = $next;
+
+            return view('lessons.question_show', compact('category', 'question', 'finished'));
+        
+        //It shows result
+        }else{
+            return redirect()->route('lesson.result',compact('category'));
+        }        
     }
 
     /**
@@ -98,9 +156,16 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function result()
+    public function result(Category $category)
     {
-        return view('lessons.result');
+        //It count correct answer about this lesson.
+        $correct_no = Auth::user()
+                        ->lessons->where('category_id', $category->id)->first()
+                        ->answers()->whereHas('option', function($query){
+                            $query->where('is_correct', 1);
+                        })->count();
+        
+        return view('lessons.result', compact('category','correct_no'));
     }
 
      /** Display a listing of one user's learned words.
