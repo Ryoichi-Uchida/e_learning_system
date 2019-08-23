@@ -83,9 +83,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question)
     {
-        //
+        return view('questions.edit', compact('question'));
     }
 
     /**
@@ -95,9 +95,53 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question)
     {
-        //
+        $request->validate([
+            'question' => ['required', 'max:255'],
+            'option.1' => ['required'],
+            'option.2' => ['required'],
+            'option.3' => ['nullable', 'required_if:answer,3'],
+            'option.4' => ['nullable', 'required_if:answer,4'],
+            'option.5' => ['nullable', 'required_if:answer,5'],
+            'option.*' => ['distinct', 'max:255'],
+            'answer' => ['required']
+        ]);
+
+        //Updating a question
+        $question->update([
+            'content' => $request->question
+        ]);
+
+        //Updating options
+        //Foreach rotate 5 times, because Request always has 5 options incruding null(These keys are 1 to 5).
+        foreach($request->option as $key => $new_option){
+            //The case DB has each option(option's key starts from 0)
+            if(!empty($question->options[$key-1])){
+                $current_option = $question->options[$key-1];               
+                //If user change form to empty, it's delete. 
+                if($new_option == null){
+                    $current_option->delete();              
+                //If user overwrite a option, it's update.
+                }else{
+                    if($request->answer == $key){
+                        $current_option->update(['content' => $new_option, 'is_correct' => '1']);
+                    }else
+                        $current_option->update(['content' => $new_option, 'is_correct' => '0']);                        
+                }
+            //The case DB doesn't have a option and request has new option, it's create.
+            }else{
+                if($new_option != null){
+                    if($request->answer == $key){
+                        $question->options()->create(['content' => $new_option, 'is_correct' => '1']);
+                    }else{
+                        $question->options()->create(['content' => $new_option, 'is_correct' => '0']);
+                    }
+                }
+            } 
+        }
+
+        return redirect()->route('category.show', ['category' => $question->category]);
     }
 
     /**
