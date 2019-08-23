@@ -27,7 +27,7 @@
                                     <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
                                 {{-- The case this category is on the way  --}}
                                 @else
-                                    <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-primary">Start</a>
+                                    <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-success">Resume</a>
                                 @endif
                             {{-- The case user isn't starting this category yet  --}}
                             @else
