@@ -18,6 +18,11 @@ class Question extends Model
         return $this->hasMany('App\Option');
     }
 
+    public function correct_option()
+    {
+        return $this->options->where('is_correct', 1)->first()->content;
+    }
+
     public function answers()
     {
         return $this->hasMany('App\Answer');

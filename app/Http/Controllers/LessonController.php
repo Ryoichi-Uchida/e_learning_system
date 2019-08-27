@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use App\Category;
 use App\Question;
 use App\Lesson;
 use App\Answer;
+
 
 class LessonController extends Controller
 {
@@ -165,15 +167,6 @@ class LessonController extends Controller
                             $query->where('is_correct', 1);
                         })->count();
         
-        return view('lessons.result', compact('category','correct_no'));
-    }
-
-     /** Display a listing of one user's learned words.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function words()
-    {
-        return view('lessons.words');
+        return view('lessons.result', compact('category', 'correct_no'));
     }
 }
