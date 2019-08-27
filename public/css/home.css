@@ -4,6 +4,9 @@
 
 .bg-gray {
   background-color: #f5f5f5;
+}
+
+.radius {
   border-radius: 10px;
 }
 
