@@ -24,6 +24,22 @@ class Lesson extends Model
     {
         return $this->hasMany('App\Answer', 'user_category_id');
     }
+
+    public function activities()
+    {
+        return $this->morphMany('App\Activity', 'activity');
+    }
+
+    //The func counts number of correct answers about a lesson.
+    public function correct_no()
+    {
+        $correct_no = $this->answers()
+                        ->whereHas('option', function($query){
+                            $query->where('is_correct', 1);
+                        })->count();
+        
+        return $correct_no;
+    }
 }
 
 

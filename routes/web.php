@@ -60,7 +60,7 @@ Route::group(['prefix' => 'lessons', 'middleware' => 'auth', 'as' => 'lesson'], 
     Route::get('', 'LessonController@index')->name('.index');
     Route::get('{category}/question_show', 'LessonController@question_show')->name('.question_show');
     Route::post('{category}/{question}/store', 'LessonController@store')->name('.store');
-    Route::get('{category}/result', 'LessonController@result')->name('.result');
+    Route::get('{user}/{category}/result', 'LessonController@result')->name('.result');
     Route::get('words', 'LessonController@words')->name('.words');
     Route::get('learned', 'LessonController@learned_index')->name('.learned_index');
     Route::get('unlearned', 'LessonController@unlearned_index')->name('.unlearned_index');
