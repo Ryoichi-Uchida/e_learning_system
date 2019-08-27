@@ -61,4 +61,6 @@ Route::group(['prefix' => 'lessons', 'middleware' => 'auth', 'as' => 'lesson'], 
     Route::post('{category}/{question}/store', 'LessonController@store')->name('.store');
     Route::get('{category}/result', 'LessonController@result')->name('.result');
     Route::get('words', 'LessonController@words')->name('.words');
+    Route::get('learned', 'LessonController@learned_index')->name('.learned_index');
+    Route::get('unlearned', 'LessonController@unlearned_index')->name('.unlearned_index');
 });

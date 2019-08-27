@@ -176,4 +176,23 @@ class LessonController extends Controller
     {
         return view('lessons.words');
     }
+
+     /**
+     * Display a listing of lessons the user already learned.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function learned_index()
+    {
+        $categories = Category::paginate(10);
+
+        return view('lessons.learned_index', compact('categories'));
+    }
+
+    public function unlearned_index()
+    {
+        $categories = Category::paginate(10);
+
+        return view('lessons.unlearned_index', compact('categories'));
+    }
 }
