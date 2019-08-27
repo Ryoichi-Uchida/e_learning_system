@@ -24,7 +24,7 @@
                             @if(Auth::user()->is_lesson_starting($category->id))
                                 {{-- The case this category was finished  --}}
                                 @if(Auth::user()->finished_question_no($category->id) == $category->questions->count())
-                                    <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                                    <a href="{{ route('lesson.result', ['user' => Auth::user()->id ,'category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
                                 {{-- The case this category is on the way  --}}
                                 @else
                                     <a href="{{ route('lesson.question_show', ['category' => $category->id]) }}" class="btn btn-success">Resume</a>

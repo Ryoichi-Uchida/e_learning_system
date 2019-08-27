@@ -49392,6 +49392,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/lessons/result.scss":
+/*!********************************************!*\
+  !*** ./resources/sass/lessons/result.scss ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/questions/create.scss":
 /*!**********************************************!*\
   !*** ./resources/sass/questions/create.scss ***!
@@ -49426,9 +49437,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/home.scss ./resources/sass/users/index.scss ./resources/sass/questions/create.scss ./resources/sass/lessons/index.scss ./resources/sass/lessons/create.scss ***!
-  \************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/welcome.scss ./resources/sass/home.scss ./resources/sass/users/index.scss ./resources/sass/questions/create.scss ./resources/sass/lessons/index.scss ./resources/sass/lessons/create.scss ./resources/sass/lessons/result.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -49439,7 +49450,8 @@ __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/users/index.scss */"./resources/sass/users/index.scss");
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/questions/create.scss */"./resources/sass/questions/create.scss");
 __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/lessons/index.scss */"./resources/sass/lessons/index.scss");
-module.exports = __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/lessons/create.scss */"./resources/sass/lessons/create.scss");
+__webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/lessons/create.scss */"./resources/sass/lessons/create.scss");
+module.exports = __webpack_require__(/*! /Users/ryo_uchi/Desktop/E-learning System/E-learning_app/resources/sass/lessons/result.scss */"./resources/sass/lessons/result.scss");
 
 
 /***/ })

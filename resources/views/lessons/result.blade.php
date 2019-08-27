@@ -1,16 +1,30 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/lessons/result.css') }}">    
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-10 bg-white">
             <div class="my-4">
+                <div class="my-4">
+                    @if ($user->id == Auth::user()->id)
+                        <a href="{{ route('lesson.index') }}" class="btn btn-secondary float-right mr-4">Go to Lesson List</a>    
+                        <a href="{{ route('home.show') }}" class="btn btn-success float-right mr-4">Go to Profile</a>
+                    @else
+                        <a href="{{ url()->previous() }}" class="btn btn-secondary float-right mr-4">Back</a>    
+                        <a href="{{ route('user.show', ['user' => $user->id]) }}" class="btn btn-success float-right mr-2">Go to User Profile</a>
+                    @endif
+                    <img src="/images/{{ $user->avatar }}" alt="" class="avatar mr-2 mb-4">
+                    <span class="text-primary h1 pt-4">{{ $user->name }}</span><span class="h4 pt-5"> 's Lesson</span>
+                </div>
                 <div>
-                    <a href="{{ route('lesson.index') }}" class="btn btn-secondary float-right mr-4">Back to Lesson List</a>
-                    <h1 class="p-2 mb-4 mx-4 border-bottom">Lesson Title</h1>
+                    <span class="float-right h4">Result : <span class="h2 text-primary">{{ $correct_no }}</span> of {{ $category->questions->count() }}</span>
+                    <h3 class="p-2 mb-4 mx-4 border-bottom">Lesson Title : <span class="h1 text-primary">{{ $category->title }}</span></h3>
                 </div>
                 <div class="col-10 m-auto">
-                    <span class="float-right h4">Result : <span class="h2 text-primary">{{ $correct_no }}</span> of {{ $category->questions->count() }}</span>
                     <table class="table table-striped table-borderless">
                         <thead>
                             <tr class="h3 text-center">
@@ -21,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (Auth::user()->lessons->where('category_id', $category->id)->first()->answers as $answer)
+                            @foreach ($user->lessons->where('category_id', $category->id)->first()->answers as $answer)
                                 <tr class="align-middle">
                                     <td>{{ $answer->question->content }}</td>
                                     {{-- The case of uncorrect --}}

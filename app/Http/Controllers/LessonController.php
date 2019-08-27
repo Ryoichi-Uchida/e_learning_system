@@ -9,6 +9,7 @@ use App\Category;
 use App\Question;
 use App\Lesson;
 use App\Answer;
+use App\user;
 
 
 class LessonController extends Controller
@@ -148,6 +149,9 @@ class LessonController extends Controller
         
         //It shows result
         }else{
+            //It makes a new activity
+            Auth::user()->make_lesson_activity($category->id);
+
             return redirect()->route('lesson.result',compact('category'));
         }        
     }
@@ -158,15 +162,21 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function result(Category $category)
+    public function result(User $user, Category $category)
     {
-        //It count correct answer about this lesson.
-        $correct_no = Auth::user()
+        $correct_no = $user
                         ->lessons->where('category_id', $category->id)->first()
-                        ->answers()->whereHas('option', function($query){
-                            $query->where('is_correct', 1);
-                        })->count();
+                        ->correct_no();
         
-        return view('lessons.result', compact('category', 'correct_no'));
+        return view('lessons.result', compact('user', 'category', 'correct_no'));
+    }
+
+     /** Display a listing of one user's learned words.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function words()
+    {
+        return view('lessons.words');
     }
 }

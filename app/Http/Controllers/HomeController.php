@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Activity;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // getting all user's activitues
+        $activities = Activity::orderBy('created_at', 'desc')->paginate(10);
+
+        return view('home', compact('activities'));
     }
 
     /**
@@ -32,7 +36,10 @@ class HomeController extends Controller
      */
     public function show()
     {
-        return view('home.show');
+        // getting this user's activities
+        $activities = Auth::user()->activities()->paginate(5);
+
+        return view('home.show', compact('activities'));
     }
 
     /**
