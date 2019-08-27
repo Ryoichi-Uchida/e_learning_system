@@ -91,4 +91,29 @@ class User extends Authenticatable
         return Activity::where('user_id', $this->id)->orderBy('created_at', 'desc');
     }
 
+    public function finished_all_no()
+    {
+        $lessons = $this->lessons()->get();
+
+        //count questions & correct answers the user learned
+        $all_no = 0;
+        $correct_no = 0;
+
+        //getting one lesson
+        foreach ($lessons as $lesson) {
+            //getting one answer user choosed from this lesson
+            foreach ($lesson->answers as $answer) {
+                //The case of uncorrect
+                if ($answer->option->content != $lesson->category->questions->where('id', $answer->question_id)->first()->correct_option()) {
+                    $all_no += 1;
+                //The case of correct
+                }else{
+                    $all_no += 1;
+                    $correct_no += 1;
+                }
+            }
+        }
+
+        return array( 'all' => $all_no, 'correct' => $correct_no);
+    }
 }

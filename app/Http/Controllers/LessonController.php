@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use App\Category;
 use App\Question;
 use App\Lesson;
 use App\Answer;
 use App\user;
+
 
 class LessonController extends Controller
 {
