@@ -98,7 +98,7 @@
             @yield('content')
         </main>
 
-        <footer class="bg-primary py-2 text-center text-white">
+        <footer class="bg-primary py-2 text-center text-white footer">
             <span class="h4">All rights reserved.</span><span class="h5"> ©Ryoichi Uchida</span>
         </footer>
     </div>
