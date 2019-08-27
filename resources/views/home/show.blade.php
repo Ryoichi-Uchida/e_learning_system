@@ -11,7 +11,7 @@
             @include('../partials/profile_space',['check_user' => Auth::user()])
         </div>
         <div class="col-8">
-            <div class="py-3 border bg-gray">
+            <div class="py-3 border bg-gray radius">
                 <h2 class="text-center">Your Activity History</h2>
                 @include('../partials/activity_space')
             </div>
