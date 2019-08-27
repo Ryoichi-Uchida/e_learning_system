@@ -152,7 +152,9 @@ class LessonController extends Controller
             //It makes a new activity
             Auth::user()->make_lesson_activity($category->id);
 
-            return redirect()->route('lesson.result',compact('category'));
+            $user = Auth::user();
+
+            return redirect()->route('lesson.result',compact('user','category'));
         }        
     }
 

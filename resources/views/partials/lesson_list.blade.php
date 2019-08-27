@@ -7,7 +7,7 @@
                 <h2>{{ $category->title }}</h2>
                 <p>{{ $category->description }}</p>
                 <div class="text-right">
-                    <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                    <a href="{{ route('lesson.result', ['user' => Auth::user()->id,'category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <h2>{{ $category->title }}</h2>
                 <p>{{ $category->description }}</p>
                 <div class="text-right">
-                    <a href="{{ route('lesson.result', ['category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
+                    <a href="{{ route('lesson.result', ['user' => Auth::user()->id, 'category' => $category->id]) }}" class="btn btn-outline-secondary">Your Result</a>
                 </div>
             </div>
         </div>
