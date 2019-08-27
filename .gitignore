@@ -1,6 +1,4 @@
 /node_modules  
-/public/js
-/public/css
 /public/mix-manifest.json
 /public/hot
 /public/storage
@@ -12,4 +10,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-package-lock.json
