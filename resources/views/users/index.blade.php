@@ -8,11 +8,13 @@
 <div class="container-fluid">
     <div class="row d-flex justify-content-center">
         <div class="col-8 bg-white py-4">
-            <h2 class="pb-4">All members</h2>
+            <div class="border-bottom mb-4">
+                @include('../partials/user_button')
+            </div>
             <div class="row">
                 @include('../partials/user_list')
             </div>
-            <div>
+            <div class="d-flex justify-content-center">
                 {{ $users->links() }}
             </div>
         </div>
