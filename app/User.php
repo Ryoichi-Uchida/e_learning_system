@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Activity;
 
 class User extends Authenticatable
 {
@@ -60,6 +61,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Lesson', 'user_id');
     }
 
+    //The func distinguishes a lesson is already starting or not. 
     public function is_lesson_starting($id)
     {
         if(!empty($this->lessons->where('category_id', $id)->first()->answers)){
@@ -69,10 +71,24 @@ class User extends Authenticatable
         }
     }
 
+    //The func counts number of answers already done.
     public function finished_question_no($id)
     {
         $count = $this->lessons->where('category_id', $id)->first()->answers->count();
+
         return $count;
+    }
+
+    //The func creates a new lesson-activity.
+    public function make_lesson_activity($id)
+    {
+        $this->lessons->where('category_id', $id)->first()->activities()->create(['user_id' => $this->id]);
+    }
+
+    //The func retrieves activity of specific user.
+    public function activities()
+    {
+        return Activity::where('user_id', $this->id)->orderBy('created_at', 'desc');
     }
 
 }

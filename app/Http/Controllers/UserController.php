@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Follow;
+use App\Activity;
 
 class UserController extends Controller
 {
@@ -49,7 +51,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        // getting this user's activitues
+        $activities = $user->activities()->paginate(5);
+        
+        return view('users.show', compact('user', 'activities'));
     }
 
     /**
@@ -91,14 +96,31 @@ class UserController extends Controller
      */
     public function follow(User $user)
     {
+        // It makes a new instance of follows
         Auth::user()->following()->attach($user);
+        
+        $follow = Follow::where('following_id', Auth::user()->id)->where('followed_id', $user->id)->first();
 
+        // It makes a new activity
+        Activity::create([
+            'user_id' => Auth::user()->id,
+            'activity_type' => 'follow',
+            'activity_id' => $follow->id
+        ]);
+        
         return redirect()->back();
     }
     
     public function unfollow(User $user)
     {
+        // It Seraches this follow instance before delete.
+        $follow = Follow::where('following_id', Auth::user()->id)->where('followed_id', $user->id)->first();
+
+        // It deletes an instance of follows
         Auth::user()->following()->detach($user);
+
+        // It deletes an activity
+        Activity::where('activity_id', $follow->id)->where('activity_type', 'follow')->first()->delete();
 
         return redirect()->back();
     }

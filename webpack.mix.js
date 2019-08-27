@@ -27,3 +27,4 @@ mix.sass('resources/sass/questions/create.scss','public/css/questions');
 // Lesson
 mix.sass('resources/sass/lessons/index.scss','public/css/lessons');
 mix.sass('resources/sass/lessons/create.scss','public/css/lessons');
+mix.sass('resources/sass/lessons/result.scss','public/css/lessons');
