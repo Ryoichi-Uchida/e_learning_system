@@ -119,4 +119,12 @@ class UserController extends Controller
 
         return view('users.followers', compact('users', 'user'));
     }
+
+    public function words(User $user)
+    {
+        //Users can check words in descending order of lessons(It means the number of words you can see same page will vary).
+        $lessons = $user->lessons()->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('users.words',compact('lessons', 'user'));
+    }
 }
