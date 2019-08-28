@@ -10649,9 +10649,11 @@ a.text-dark:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.content {
+  min-height: calc(100vh - 95px);
+}
+
 .footer {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
+  height: 40px;
 }
 
