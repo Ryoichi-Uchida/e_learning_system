@@ -11,7 +11,7 @@
             <div class="my-4">
                 <div>
                     <span class="float-right h4 mr-4">No : <span class="h2 text-primary">{{ $finished == null ? 1 : $finished+1 }}</span> of {{ $category->questions->count() }}</span>
-                    <h2 class="p-2 mb-4 mx-4 border-bottom">Lesson Title : <span class="h1 text-primary">{{ $category->description }}</span></h2>
+                    <h2 class="p-2 mb-4 mx-4 border-bottom">Lesson Title : <span class="h1 text-primary">{{ $category->title }}</span></h2>
                 </div>
                 <div class="col-8 m-auto">
                     <div>
